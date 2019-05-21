@@ -24,13 +24,14 @@ with open(blast, "rU") as blast_fh:
         elif fields[-1].split("|")[-1] == "prokaryotic":
             d[fields[0].rsplit("_", 1)[0]][3] +=1
 for k, v in d.iteritems():
-    if float(v[2])/v[1] > 0.5:
-        d[k][4] = True
-    elif v[2] >=1 and v[3] == 0:
-        d[k][4] = True
-    elif v[2] >= (0.1 * v[1]) and v[2] >=3 :
-        if v[3] < (0.25 * v[1]):
+    if v[1] > 0:
+        if float(v[2])/v[1] > 0.5:
             d[k][4] = True
+        elif v[2] >=1 and v[3] == 0:
+            d[k][4] = True
+        elif v[2] >= (0.1 * v[1]) and v[2] >=3 :
+            if v[3] < (0.25 * v[1]):
+                d[k][4] = True
 length = 0
 for k, v in d.iteritems():
     if v[4]:
